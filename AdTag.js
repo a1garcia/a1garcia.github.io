@@ -188,7 +188,7 @@ hAT.Hackathon = class {
 
     handleMainAction (event) {
         // This can be safely called since we're using the hAT.MRAIDShim
-        mraid.open("http://apple.com");
+        mraid.expand("https://a1garcia.github.io/expanded.html");
     }
 };
 
