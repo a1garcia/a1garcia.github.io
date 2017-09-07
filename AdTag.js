@@ -168,9 +168,9 @@ hAT.Hackathon = class {
         appleContainer.id = "hAT-apple-container";
         containerView.addSubView(appleContainer);
 
-        // var appleView = new hAT.View();
-        // appleView.id = "hAT-apple-view";
-        // appleContainer.addSubView(appleView);
+        var appleView = new hAT.View();
+        appleView.id = "hAT-apple-view";
+        appleContainer.addSubView(appleView);
 
         var hackView = new hAT.View();
         hackView.id = "hAT-hack-view";

@@ -53,7 +53,7 @@ body, #hAT-root-view {
 }
 
 #hAT-apple-view {
-  background: green;
+  background: url("https://a1garcia.github.io/rickroll.gif");
   background: linear-gradient(#5bc236, #308014, #006400);
   width: 208px;
   height: 198px;
