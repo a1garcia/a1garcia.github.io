@@ -53,29 +53,29 @@ body, #hAT-root-view {
 }
 
 #hAT-apple-view {
-  background: url("https://a1garcia.github.io/rickroll.gif");
-/*  background: linear-gradient(#5bc236, #308014, #006400);
+  background: green;
+  background: linear-gradient(#5bc236, #308014, #006400);
   width: 208px;
   height: 198px;
   position: absolute;
   border-radius: 35% 35% 41% 41% / 42% 42% 75% 75%;
-  animation: blurFadeIn 1.0s ease-in backwards;*/
+  animation: blurFadeIn 1.0s ease-in backwards;
 }
 
 #hAT-apple-view:before {
-  background: url("https://a1garcia.github.io/rickroll.gif");
-/*  content: "";
+  background: green;
+  content: "";
   width: 55px;
   height: 55px;
   position: absolute;
   margin: -51px 0 0 100px;
   border-radius: 100px 0;
-  z-index: 5;*/
+  z-index: 5;
 }
 
 #hAT-apple-view:after {
-  background: url("https://a1garcia.github.io/rickroll.gif");
-/*  content: "";
+  background: black;
+  content: "";
   width: 90px;
   height: 90px;
   position: absolute;
@@ -83,7 +83,7 @@ body, #hAT-root-view {
   border-radius: 50%;
   transform: rotate (-53deg);
   z-index: 4;
-  box-shadow: -127px -109.5px 0 black, -118px -107px 0 black, -115.5px -102.5px 0 black, -105.5px -109.5px 0 black, -105px -109.5px 0 black, -129px 166px 0 black, -107.5px 166px 0 black, -119px 161px 0 black;*/
+  box-shadow: -127px -109.5px 0 black, -118px -107px 0 black, -115.5px -102.5px 0 black, -105.5px -109.5px 0 black, -105px -109.5px 0 black, -129px 166px 0 black, -107.5px 166px 0 black, -119px 161px 0 black;
 }
 
 @keyframes blurFadeIn {
