@@ -1,3 +1,5 @@
+<script src="mraid.js"></script>
+
 <div id="adContainer" style="width:320px;margin:0px;padding:0px;background-color:#ffffff;">
     <div id="expanded" style="display:none;width:320px;height:480px;margin:auto;position:relative;top:0px;left:0px;">
         <img width="320" height="480" style="position:absolute;top:0px;left:0px;" src="http://admarvel.s3.amazonaws.com/demo/mraid/320x480.png" />
