@@ -187,8 +187,9 @@ hAT.Hackathon = class {
     }
 
     handleMainAction (event) {
+        window.navigate("https://simpl.info/geolocation/");
         // This can be safely called since we're using the hAT.MRAIDShim
-        mraid.open("www.google.com");
+        // mraid.open("www.google.com");
 //         $.getJSON('//http://ipapi.co/json/', function(data) {
 //         console.log(JSON.stringify(data, null, 2));
 //         });
