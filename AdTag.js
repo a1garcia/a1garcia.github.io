@@ -188,8 +188,9 @@ hAT.Hackathon = class {
 
     handleMainAction (event) {
         // This can be safely called since we're using the hAT.MRAIDShim
-        mraid.open("http://google.com");
+        // mraid.open("http://google.com");
         // window.navigate("https://simpl.info/bigimage/");
+        window.location.href("https://simpl.info/bigimage/");
     }
 };
 
