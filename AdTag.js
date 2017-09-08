@@ -12,7 +12,7 @@ var hAT = {};
  * @discussion
  * The absolute path to the CSS file to use for your hack.
  */
-hAT.css = "http://ec2-54-67-29-106.us-west-1.compute.amazonaws.com/nh/hackathon.css"
+hAT.css = "https://a1garcia.github.io/hackathon.css"
 // hAT.css = "./hackathon.css"
 
 /*
