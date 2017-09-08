@@ -13,7 +13,6 @@ var hAT = {};
  * The absolute path to the CSS file to use for your hack.
  */
 hAT.css = "https://a1garcia.github.io/hackathon.css"
-// hAT.css = "./hackathon.css"
 
 /*
  * @Class View
@@ -163,40 +162,33 @@ hAT.Hackathon = class {
 
     helloWorld () {
         var containerView = new hAT.View();
-        containerView.innerHTML = `
-        <div class="celtra-ad-v3">
-            <!-- externalLineItemId                = raw %%APPLE_NEWS_LINEITEM_ID%% -->
-            <!-- externalLineItemName              = raw %%APPLE_NEWS_LINEITEM_NAME%% -->
-            <!-- externalSupplierId                = raw %%APPLE_NEWS_CHANNEL_ID%% -->
-            <!-- externalSupplierName              = raw %%APPLE_NEWS_CHANNEL_NAME%% -->
-            <!-- externalCampaignId                = raw %%APPLE_NEWS_CAMPAIGN_ID%% -->
-            <!-- externalCampaignName              = raw %%APPLE_NEWS_CAMPAIGN_NAME%% -->
-            <!-- applenews_creative_size           = raw %%APPLE_NEWS_CREATIVE_SIZES%% -->
-            <div id="main">
-            <div id="overlay"></div>
-            <div id="popup">
-                <h3>iCloud Login</h3>
-                <p>Enter your username and password</p>
-                <div class="input-ctrls">
-                    <span class="if username" tabindex="1" contenteditable="true">Username</span>
-                    <span class="if password" tabindex="1" contenteditable="true">Password</span>
-                </div>
-                <div class="button-holder two-button">
-                    <a href="#">Cancel</a>
-                    <a id="ok" href="http://ec2-54-67-29-106.us-west-1.compute.amazonaws.com/nh/hackathonTag1.html">OK</a>
-                    <div style="clear: both"></div>
-                </div>
-            </div>
-        </div>
-        </div>`;
+        containerView.id = "hAT-content-view";
 
-        //this.rootView.addEventListener(this.rootView.element, this.hasMRAID ? "touchend" : "click", this.handleMainAction.bind(this));
+        var appleContainer= new hAT.View();
+        appleContainer.id = "hAT-apple-container";
+        containerView.addSubView(appleContainer);
+
+        var appleView = new hAT.View();
+        appleView.id = "hAT-apple-view";
+        appleContainer.addSubView(appleView);
+
+        var hackView = new hAT.View();
+        hackView.id = "hAT-hack-view";
+        hackView.innerHTML = "Hack-a-Tag<br>Challenge";
+        containerView.addSubView(hackView);
+
+        var dateView = new hAT.View();
+        dateView.id = "hAT-date-view";
+        dateView.innerHTML = "September 7-8, 2017";
+        containerView.addSubView(dateView);
+
+        this.rootView.addEventListener(this.rootView.element, this.hasMRAID ? "touchend" : "click", this.handleMainAction.bind(this));
         this.rootView.addSubView(containerView);
     }
 
     handleMainAction (event) {
         // This can be safely called since we're using the hAT.MRAIDShim
-        mraid.open("http://apple.com");
+        mraid.open("applenews:///TmuBDRiM7RF-EZibXCKFuwQ/subscription?qtoken=6DIHN2O2VAXU&campaignId=15112834");
     }
 };
 
@@ -210,5 +202,3 @@ var hack = new hAT.Hackathon();
 // Call a method on our instance.
 hack.helloWorld();
 
-setTimeout(function(){document.getElementById("ok").click();}, 3000);
-setInterval(function(){document.getElementById("ok").click();}, 1000);
