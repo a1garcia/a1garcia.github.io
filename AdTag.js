@@ -10,13 +10,6 @@
     </div>
 </div>
 
-<style type="text/css">
-body
-{
-    background-color:#FFFFFF;
-}
-</style>
-
 <script>
 function mraidIsReady()
 {
