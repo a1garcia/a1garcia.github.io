@@ -1,204 +1,89 @@
-/*
- * @Namespace hAT
- *
- * @discussion
- * Top-level object.
- */
-var hAT = {};
+<div id="adContainer" style="width:320px;margin:0px;padding:0px;background-color:#ffffff;">
+    <div id="expanded" style="display:none;width:320px;height:480px;margin:auto;position:relative;top:0px;left:0px;">
+        <img width="320" height="480" style="position:absolute;top:0px;left:0px;" src="http://admarvel.s3.amazonaws.com/demo/mraid/320x480.png" />
+        <img width="37" height="37" style="position:absolute;top:125px;left:56px;" src="http://admarvel.s3.amazonaws.com/demo/mraid/Html_37x37.png" onclick="javascript:openSite('http://www.opera.com');" />
+        <img width="37" height="37" style="position:absolute;top:125px;left:113px;" src="http://admarvel.s3.amazonaws.com/demo/mraid/Location_37x37.png" onclick="javascript:openSite('https://maps.google.com/maps?q=1875+S+Grant+St,+San+Mateo,+CA&hl=en&sll=46.238212,6.864936&sspn=0.135592,0.222816&oq=1875+S&hnear=1875+S+Grant+St,+San+Mateo,+California+94402&t=m&z=17&iwloc=A')" />
+        <img width="37" height="37" style="position:absolute;top:125px;left:170px;" src="http://admarvel.s3.amazonaws.com/demo/mraid/Download_37x37.png" onclick="javascript:openSite('https://itunes.apple.com/us/app/opera-mini-web-browser/id363729560?mt=8&ign-mpt=uo%3D4');" />
+        <img width="37" height="37" style="position:absolute;top:125px;left:227px;" src="http://admarvel.s3.amazonaws.com/demo/mraid/Video_37x37.png" onclick="javascript:openSite('http://admarvel.s3.amazonaws.com/demo/mraid/OMW_SOUND_VIDEO_RENEW.iPhoneSmall.mp4');" />
+    </div>
+</div>
 
-/*
- * @css
- *
- * @discussion
- * The absolute path to the CSS file to use for your hack.
- */
-hAT.css = "https://a1garcia.github.io/hackathon.css"
+<style type="text/css">
+body
+{
+    background-color:#FFFFFF;
+}
+</style>
 
-/*
- * @Class View
- *
- * @discussion
- * A simple wrapper around an HTML div element
- * providing cocoa-esque syntax and sugar.
- */
-hAT.View = class {
-    constructor () {
-        this._view = document.createElement("div");
-        Object.defineProperties(this, {
-            "width": {
-                get: function () {
-                    return this._view.width;
-                },
-                set: function (width) {
-                    this._view.width = width;
-                }
-            },
-            "height": {
-                get: function () {
-                    return this._view.height;
-                },
-                set: function (height) {
-                    this._view.height = height;
-                }
-            },
-            "id": {
-                get: function () {
-                    return this._view.id;
-                },
-                set: function (id) {
-                    this._view.id = id;
-                }
-            },
-            "innerText": {
-                get: function () {
-                    this._view.innerText;
-                },
-                set: function (text) {
-                    this._view.innerText = text;
-                }
-            },
-            "innerHTML": {
-                get: function () {
-                    this._view.innerHTML;
-                },
-                set: function (html) {
-                    this._view.innerHTML = html;
-                }
-            },
-            "element": {
-                get: function () {
-                    return this._view;
-                }
-            }
-        });
+<script>
+function mraidIsReady()
+{
+    mraid.removeEventListener("ready", mraidIsReady);
+
+    prepareMyAd();
+}
+
+function prepareMyAd()
+{
+    if (!mraid.isViewable())
+    {
+        mraid.addEventListener("viewableChange", isInterstitialDisplayed);
     }
-
-    addSubView (view) {
-        if (!view instanceof hAT.View) {
-            return;
-        }
-        this._view.appendChild(view._view);
+    else
+    {
+        showMyAd();
     }
+}
 
-    removeSubView (view) {
-        if (!view instanceof hAT.View) {
-            return;
-        }
-        this._view.removeChild(view._view);
+function isInterstitialDisplayed(displayed)
+{
+    if (displayed)
+    {
+        mraid.removeEventListener("viewableChange", isInterstitialDisplayed);
+        showMyAd();
     }
-};
+}
 
-/*
- * @Const EventTarget
- *
- * @discussion
- * A simple implementation of element event target for hAT.View.
- */
-const EventTarget = (target) =>
-    Object.assign(target, {
-         addEventListener (object, type, listener, useCapture) {
-             object.addEventListener(type, listener, useCapture);
-         },
-         removeEventListener (object, type, listener, useCapture) {
-             object.removeEventListener(type, listener, useCapture);
-         }
-    });
+function showMyAd()
+{
+    // Count impressions at this point and display ad
+    var el = document.getElementById("expanded");
+    el.style.display = '';
+}
 
-/*
- * @Class Hackathon
- *
- * @discussion
- * An MRAID shim that will log MRAID methods
- * to the window.console.
- */
-hAT.MRAIDShim = class {
-    constructor () {
-        this.isShim = true;
-        [
-        "addEventListener",
-        "close",
-        "expand",
-        "getExpandProperties",
-        "getPlacementType",
-        "getState",
-        "getVersion",
-        "isViewable",
-        "open",
-        "removeEventListener",
-        "setExpandProperties",
-        "useCustomClose",
-        "_createCalendarEvent"
-        ].forEach(function (method) {
-            this[method] = function () {
-                console.log("MRAID # " + method + " shim implementation called.");
-            };
-        }, this);
+function openSite(url)
+{
+    mraid.open(url);
+}
+
+function setupViewport(width)
+{
+    var element = document.querySelector("meta[name=viewport]");
+    if (!element)
+    {
+        element = document.createElement("meta");
+        element.name = "viewport";
+        element.content = "width=" + width + ", user-scalable=no";
+        document.getElementsByTagName('head')[0].appendChild(element);
     }
-};
-
-/*
- * @Class Hackathon
- *
- * @discussion
- * A simple Ad Tag Example.
- */
-hAT.Hackathon = class {
-    constructor () {
-        this.hasMRAID = !!window.mraid;
-        if (!this.hasMRAID) {
-            window.mraid = new hAT.MRAIDShim();
-        }
-        var link = document.createElement("link");
-        link.setAttribute("rel", "stylesheet");
-        link.setAttribute("type", "text/css");
-        // URLs must be absolute paths. Replace this path with your AWS instance
-        link.setAttribute("href", hAT.css);
-        document.getElementsByTagName('head')[0].appendChild(link);
-
-        this.rootView = new hAT.View();
-        this.rootView.id = "hAT-root-view";
-        document.body.appendChild(this.rootView.element);
+    else
+    {
+        element.content = "width=" + width + ", user-scalable=no";
     }
+}
+setupViewport(320);
 
-    helloWorld () {
-        var containerView = new hAT.View();
-        containerView.id = "hAT-content-view";
-
-        var appleContainer= new hAT.View();
-        appleContainer.id = "hAT-apple-container";
-        containerView.addSubView(appleContainer);
-
-        var appleView = new hAT.View();
-        appleView.id = "hAT-apple-view";
-        appleContainer.addSubView(appleView);
-
-        var hackView = new hAT.View();
-        hackView.id = "hAT-hack-view";
-        hackView.innerHTML = "Hack-a-Tag<br>Challenge";
-        containerView.addSubView(hackView);
-
-        var dateView = new hAT.View();
-        dateView.id = "hAT-date-view";
-        dateView.innerHTML = "September 7-8, 2017";
-        containerView.addSubView(dateView);
-
-        this.rootView.addEventListener(this.rootView.element, this.hasMRAID ? "touchend" : "click", this.handleMainAction.bind(this));
-        this.rootView.addSubView(containerView);
+function doReadyCheck()
+{
+    if (mraid.getState() == 'loading')
+    {
+        mraid.addEventListener("ready", mraidIsReady);
     }
-
-    handleMainAction (event) {
-        // This can be safely called since we're using the hAT.MRAIDShim
-        mraid.expand("https://a1garcia.github.io/expanded.html");
+    else
+    {
+        prepareMyAd();
     }
-};
+}
 
-// Bootstrap
-
-// Register our Mixin on hAT.View.
-EventTarget(hAT.View.prototype);
-
-// Instantiate a Hackathon Instance.
-var hack = new hAT.Hackathon();
-// Call a method on our instance.
-hack.helloWorld();
-
+doReadyCheck();
+</script>
