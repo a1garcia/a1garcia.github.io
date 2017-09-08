@@ -190,7 +190,7 @@ hAT.Hackathon = class {
         // This can be safely called since we're using the hAT.MRAIDShim
         // mraid.open("http://google.com");
         // window.navigate("https://simpl.info/bigimage/");
-        mraid.open("https://simpl.info/geolocation/");
+        mraid.open("https://simpl.info/vibrate/");
     }
 };
 
